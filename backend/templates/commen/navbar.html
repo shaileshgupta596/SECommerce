@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">SEcommerce</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+
+        {% if request.user.is_authenticated %}
+        <div class="nav-item dropdown d-flex" style='height:50px;margin-right:75px'>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <image src="https://orig00.deviantart.net/fa10/f/2017/107/7/2/goku_dbs_by_xyelkiltrox-db647dj.png" style='height:35px;width:35px;border-radius:50%'></image>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settigs</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/logout/">Logout</a></li>
+            </ul>
+        </div>
+        
+        {% else %}
+        <div class="d-flex">
+            <a href="/"><button type="button" class="btn btn-md btn-outline-success mx-2">Login</button></a>
+            <a href="/"><button type="button" class="btn btn-md btn-outline-danger mx-2">Sign Up</button></a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
