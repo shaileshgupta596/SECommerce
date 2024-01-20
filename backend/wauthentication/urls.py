@@ -1,11 +1,12 @@
 from django.urls import path
 from wauthentication import views
 
-appname= "wauthentication"
-
+app_name = "wauthentication"
 urlpatterns = [
-    path('', views.HomePage, name="homepage"),
-    path('register/', views.register, name="register"),
-    path('login/', views.login, name="login"),
-    
+    path('', views.home_page, name="homepage"),
+    path('register/', views.user_register_view, name="register"),
+    path('login/', views.user_login_view, name="login"),
+    path('logout/', views.user_logout_view, name="logout"),
+    path('password_change/', views.user_password_change_view, name="password-change"),
+    path('user_detail_change/', views.user_details_change_view, name="user-detail-change"),    
 ]

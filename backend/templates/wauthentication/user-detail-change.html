@@ -2,12 +2,12 @@
 
 {% block content1 %}
 <div class="d-flex justify-content-center mt-5">
-    <div class="form-control px-5" id="Register-form" style="width:500px;">
+    <div class="form-control px-5" id="user-detail-change-form" style="width:500px;">
         <form action='.' method="post">
-            <h2 align="center"><b>Register</b></h2>
+            <h2 align="center"><b>User Details</b></h2>
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="btn btn-danger" type="submit"> Register </button>
+            <button class="btn btn-danger" type="submit"> Update Details </button>
         </form>
     </div>
 </div>

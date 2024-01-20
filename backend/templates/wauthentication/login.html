@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
 {% block content1 %}
-    Login
+    <div class="d-flex justify-content-center mt-5">
+        <div class="form-control px-5" id="login-form" style="width:500px">
+            <form action='.' method="post">
+                <h2 align="center"><b>Login</b></h2>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-success" type="submit"> Login </button>
+            </form>
+        </div>
+    </div>
 {% endblock content1 %}
