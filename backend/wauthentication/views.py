@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, UserChangeForm
+from .forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, UserDeatailChangeForm
 from .models import User
 
 
@@ -99,18 +99,22 @@ def user_password_change_view(request, *args, **kwargs):
 def user_details_change_view(request, *args, **kwargs):
     template_name = "wauthentication/user-detail-change.html"
     context = {}
+    user = request.user
     if request.method == 'POST':
-        form = UserChangeForm(data=request.POST)
+        form = UserDeatailChangeForm(data=request.POST)
         if form.is_valid():
-            obj = form.cleaned_data
-            form.save()
+            cleaned_data = form.cleaned_data
+            user.first_name = cleaned_data.get('first_name')
+            user.last_name = cleaned_data.get('last_name')
+            user.email = cleaned_data.get('email')
+            user.save()
             messages.success(request, "User Details Changed Successfully")
         else:
             error_messages =  form.error_messages
             for key, error in error_messages.items():
                 messages.warning(request, error)
     else:
-        form = UserChangeForm(data=None)
+        form = UserDeatailChangeForm(data=None, instance=user)
     context = {"form":form}
     return render(request=request, template_name=template_name, context=context)
 

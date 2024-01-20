@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any
 from django import forms
 from django.contrib.auth.base_user import AbstractBaseUser 
@@ -5,6 +6,23 @@ from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationFo
 from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
 from django.contrib.auth.forms import PasswordChangeForm as BasePasswordChangeForm
 from django.contrib.auth.forms import UserChangeForm as BaseUserChangeForm
+from django.core.files.base import File
+from django.db.models.base import Model
+from django.forms.utils import ErrorList
+from .models import User
+
+
+class UserDeatailChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "email", "is_active", "is_staff"]
+        widgets = {
+            "first_name": forms.TextInput({"class":"form-control"}),
+            "last_name": forms.TextInput({"class":"form-control"}),
+            "email": forms.TextInput({"class":"form-control"}),
+            "is_active": forms.TextInput({"class":"form-control", "readonly":True}),
+            "is_staff": forms.TextInput({"class":"form-control", "readonly":True})
+        }
 
 
 class PasswordChangeForm(BasePasswordChangeForm):
