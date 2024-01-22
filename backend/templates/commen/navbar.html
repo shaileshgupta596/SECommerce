@@ -17,8 +17,8 @@
         {% if request.user.is_authenticated %}
         <div class="nav-item dropdown d-flex" style='height:50px;margin-right:30px'>
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <image src="https://orig00.deviantart.net/fa10/f/2017/107/7/2/goku_dbs_by_xyelkiltrox-db647dj.png" style='height:35px;width:35px;border-radius:50%'></image>
-            </a>
+                <image src="{{ request.user.userextradetail_set.get.profile_image.url }}" style='height:35px;width:35px;border-radius:50%'></image>
+              </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href='{% url "wauthentication:user-detail-change" %}'>Profile</a></li>
               <li><a class="dropdown-item" href='{% url "wauthentication:password-change" %}'>Change Password </a></li>

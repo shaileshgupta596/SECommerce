@@ -1,10 +1,10 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, UserDeatailChangeForm
-from .models import User
+from .forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, UserDeatailChangeForm, UEDForm
+from .models import User, UserExtraDetail
 
 
 @login_required(login_url="/wauthentication/login/")
@@ -97,7 +97,7 @@ def user_password_change_view(request, *args, **kwargs):
 
 @login_required(login_url="/wauthentication/login/")
 def user_details_change_view(request, *args, **kwargs):
-    template_name = "wauthentication/user-detail-change.html"
+    template_name = "wauthentication/user-detail.html"
     context = {}
     user = request.user
     if request.method == 'POST':
@@ -115,6 +115,35 @@ def user_details_change_view(request, *args, **kwargs):
                 messages.warning(request, error)
     else:
         form = UserDeatailChangeForm(data=None, instance=user)
+    context = {"form":form}
+    return render(request=request, template_name=template_name, context=context)
+
+
+@login_required(login_url="/wauthentication/login/")
+def user_image_change_view(request, *args, **kwargs):
+    template_name = "wauthentication/image-upload.html"
+    context = {}
+    user = request.user
+    if request.method == "POST":
+        print(request.FILES, request.POST)
+        form = UEDForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            try:
+                profile_image = UserExtraDetail.objects.get(user=user)
+            except:
+                profile_image = None
+
+            if profile_image:
+                profile_image.delete()
+
+            object = form.save(commit=False)
+            object.user = user
+            object.save()
+        else:
+            pass
+
+    else:
+        form = UEDForm(data=None)
     context = {"form":form}
     return render(request=request, template_name=template_name, context=context)
 

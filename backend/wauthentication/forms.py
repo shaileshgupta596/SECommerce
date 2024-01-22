@@ -9,7 +9,13 @@ from django.contrib.auth.forms import UserChangeForm as BaseUserChangeForm
 from django.core.files.base import File
 from django.db.models.base import Model
 from django.forms.utils import ErrorList
-from .models import User
+from .models import User, UserExtraDetail
+
+
+class UEDForm(forms.ModelForm):
+    class Meta:
+        model = UserExtraDetail
+        fields = ['profile_image']
 
 
 class UserDeatailChangeForm(forms.ModelForm):
