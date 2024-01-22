@@ -3,7 +3,6 @@ from wauthentication import views
 
 app_name = "wauthentication"
 urlpatterns = [
-    path('', views.home_page, name="homepage"),
     path('register/', views.user_register_view, name="register"),
     path('login/', views.user_login_view, name="login"),
     path('logout/', views.user_logout_view, name="logout"),

@@ -1,9 +1,23 @@
 body{
-    font-family: 'Courier New', Courier, monospace;
+    /*font-family: 'Courier New', Courier, monospace;*/
     font-weight: bold;
-    font-size:15px;
+    font-size:12px;
 }
 
 button{
     font-weight: bold;    
 }
+
+.card-header{
+    background-color: white;
+}
+
+.navbar{
+    background-color: white;
+}
+
+.container{
+    position: relative;
+    margin-top: 100px;
+}
+

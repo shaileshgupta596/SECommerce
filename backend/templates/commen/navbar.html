@@ -1,18 +1,28 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+{% load static %}
+<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary shadow-sm">
     <div class="container-fluid">
-      <a class="navbar-brand" href='{% url "wauthentication:homepage" %}'>SEcommerce</a>
+      <a class="navbar-brand" href='{% url "socialapp:home" %}'>SEcommerce</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+        <ul class="navbar-nav me-auto mt-2 mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href='{% url "wauthentication:homepage" %}'>Home</a>
+            <a class="nav-link active" aria-current="page" href='{% url "socialapp:home" %}'>Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
           </li>
         </ul>
+
+        <div class="row" style="position:relative;left:-320;width:500px">
+          <div class="col-sm-6 input-group rounded">
+            <input type="search" 
+                   class="form-control rounded"
+                  />
+            <image class="mx-2 my-auto" src='{% static "utils/search.png"%}' width="25" height="25"></image>
+          </div>
+        </div>
 
         {% if request.user.is_authenticated %}
         <div class="nav-item dropdown d-flex" style='height:50px;margin-right:30px'>
@@ -27,7 +37,7 @@
             </ul>
         </div>
 
-        <p class="mr-2"><b>Hi,{{ request.user.username| capfirst }}</b></p>
+        <p class="mr-2 mt-3"><b>Hi,{{ request.user.username| capfirst }}</b></p>
         
         {% else %}
         <div class="d-flex">

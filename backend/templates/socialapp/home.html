@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block socialapp %}
+    <div class="row">
+        <div class="col-sm-2">
+            {% include "socialapp/social-sidebar-menu.html" %}
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+            {% for object in objects %}          
+                {% include "socialapp/social-post.html" with object=object %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="row">
+            {% for user in users %}
+                {% include "socialapp/friend-suggestions.html" with user=user %}
+            {% endfor %}
+            </div>
+            
+        </div>
+        
+    </div>   
+{% endblock socialapp %}
