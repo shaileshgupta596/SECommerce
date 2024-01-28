@@ -8,7 +8,7 @@
             <h2 class="mt-1" align="center"><b>Hi,{{ request.user.username }}</b></h2>
             <a class="nav-link disabled" href="#">
                 <div class="d-flex justify-content-center">
-                    <image class="my-3" src="{{ request.user.userextradetail_set.get.profile_image.url }}" style='height:150px;width:150px;border-radius:150%'></image>
+                    <image class="my-3" src="{%if request.user.userextradetail_set.get.profile_image %}{{ request.user.userextradetail_set.get.profile_image.url }}{% endif %}" style='height:150px;width:150px;border-radius:150%'></image>
                 </div>
             </a>
             <hr>

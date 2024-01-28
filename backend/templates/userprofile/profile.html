@@ -2,23 +2,23 @@
 {% block socialapp %}
     <div class="row shadow-sm bg-light">
         <div class="col-md-3">
-            {% include "socialapp/profile-image-detail.html" %}
+            {% include "userprofile/profile-image-detail.html" %}
         </div>
 
         <div class="col-md-9">
             <div class="row">
-                {% include "socialapp/profile-follower-post.html" %}
+                {% include "userprofile/profile-follower-post.html" %}
             </div>
 
             <div class="row mt-3 d-flex justify-content-left">
-                {% include "socialapp/profile-update-share.html" %}
+                {% include "userprofile/profile-update-share.html" %}
             </div>
         </div>
 
     </div>
 
     <div class="row mt-5 shadow-sm bg-light" id="user-posts" >
-        {% include "socialapp/profile-post-reel-switch.html" %}
+        {% include "userprofile/profile-post-reel-switch.html" %}
     </div>
 
     {% include "socialapp/add-post-form.html" %}

@@ -61,17 +61,10 @@ def delete_post_view(request, post_id, *args, **kwargs):
         messages.success(request, "Post Deleted")
     else:
         messages.error(request, "Post Not Found")
-    success_url = reverse("socialapp:user-profile")
+    success_url = reverse("userprofile:user-profile")
     return redirect(success_url)
 
 
-@login_required(login_url="/wauthentication/login/")
-def user_profile_view(request, *args, **kwargs):
-    template_name = "socialapp/profile.html"
-    context = {}
-    user = request.user
-    objects = Post.objects.filter(user=user)
-    context ={ "objects": objects}
-    return render(request=request, template_name=template_name, context=context)
+
 
 

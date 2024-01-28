@@ -2,7 +2,7 @@
     <div class="d-flex rounded">
         <div class="post-user-image mx-auto pt-2">
             <image class="border border-2 border-secondary"
-                src="{{ user.userextradetail_set.get.profile_image.url }}" 
+                src="{%if user.userextradetail_set.get.profile_image %}{{ user.userextradetail_set.get.profile_image.url }}{% endif %}" 
                 style='height:70px;width:70px;border-radius:50%'>
                 <p class="d-flex justify-content-center"><b>{{ user.username | capfirst }} </b></p>
                 <buttom class="btn btn-sm btn-primary mx-1 mb-2"><b>Follow</b></button>

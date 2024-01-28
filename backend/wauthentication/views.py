@@ -28,13 +28,17 @@ def user_register_view(request, *args, **kwargs):
     context = {}
     user = request.user
     if user.is_authenticated:
-        return redirect('/wauthentication/')
+        url = reverse("socialapp:home")
+        return redirect(url)
     
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
             obj = form.cleaned_data
-            form.save()
+            user = form.save(commit=True)
+
+            extra_details = UserExtraDetail(user=user)
+            extra_details.save()
             messages.success(request, "Account Created")
             success_url = reverse('wauthentication:login')
             return redirect(success_url)
@@ -53,7 +57,8 @@ def user_register_view(request, *args, **kwargs):
 def user_login_view(request, *args, **kwargs):
     user = request.user
     if user.is_authenticated:
-        return redirect('/wauthentication/')
+        url = reverse("socialapp:home")
+        return redirect(url)
     
     context = {}
     if request.method == "POST":
@@ -121,6 +126,10 @@ def user_details_change_view(request, *args, **kwargs):
     else:
         extra_details = UserExtraDetail.objects.get(user=user)
         user_bio = extra_details.user_bio
+        print(user_bio)
+        if user_bio is None:
+            user_bio = "Add Bio...."
+
         form = UserDeatailChangeForm(data=None, instance=user, initial={"user_bio":user_bio})
     context = {"form":form}
     return render(request=request, template_name=template_name, context=context)
@@ -132,20 +141,21 @@ def user_image_change_view(request, *args, **kwargs):
     context = {}
     user = request.user
     if request.method == "POST":
-        print(request.FILES, request.POST)
         form = UEDForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             try:
-                profile_image = UserExtraDetail.objects.get(user=user)
+                extra_details = UserExtraDetail.objects.get(user=user)
+                user_bio = extra_details.user_bio
             except:
-                profile_image = None
+                extra_details = None
 
-            if profile_image:
-                profile_image.delete()
+            if extra_details:
+                extra_details.delete()
 
-            object = form.save(commit=False)
-            object.user = user
-            object.save()
+            updated_extra_details = form.save(commit=False)
+            updated_extra_details.user = user
+            updated_extra_details.user_bio = user_bio
+            updated_extra_details.save()
         else:
             pass
 

@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('wauthentication/', include('wauthentication.urls')),
     path('socialapp/', include('socialapp.urls')),
+    path('socialapp/profile/', include('userprofile.urls')),
 ]
 
 if settings.DEBUG:

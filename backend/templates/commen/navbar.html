@@ -41,17 +41,16 @@
         </a>
         <div class="nav-item dropdown d-flex" style='height:50px;margin-right:30px'>
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <image src="{{ request.user.userextradetail_set.get.profile_image.url }}" style='height:35px;width:35px;border-radius:50%'></image>
+                <image src="{%if request.user.userextradetail_set.get.profile_image %}{{ request.user.userextradetail_set.get.profile_image.url }}{% endif %}" style='height:35px;width:35px;border-radius:50%'></image>
+                <b class="mx-2"> Hi,{{ request.user.username| capfirst }}</b>
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href='{% url "socialapp:user-profile" %}'>Profile</a></li>
-              <li><a class="dropdown-item" href='{% url "wauthentication:password-change" %}'>Change Password </a></li>
+              <li><a class="dropdown-item" href='{% url "userprofile:user-profile" %}'><b>Profile</b></a></li>
+              <li><a class="dropdown-item" href='{% url "wauthentication:password-change" %}'><b>Change Password</b></a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href='{% url "wauthentication:logout" %}'>Logout</a></li>
+              <li><a class="dropdown-item" href='{% url "wauthentication:logout" %}'><b>Logout</b></a></li>
             </ul>
         </div>
-
-        <p class="mr-2 mt-3"><b>Hi,{{ request.user.username| capfirst }}</b></p>
         
         {% else %}
         <div class="d-flex">

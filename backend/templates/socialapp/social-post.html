@@ -4,7 +4,7 @@
         <div class="card-header d-flex justify-content-between">
             <div class="post-user-image">
                 <image class="border border-2 border-secondary"
-                       src="{{ object.user.userextradetail_set.get.profile_image.url }}" 
+                       src="{%if object.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
                        style='height:35px;width:35px;border-radius:50%'>
                     <b class="mx-2"> {{ object.user.username | capfirst }} </b>
                 </image>

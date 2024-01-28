@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'wauthentication',
     'socialapp',
+    'userprofile',
 ]
 
 MIDDLEWARE = [
