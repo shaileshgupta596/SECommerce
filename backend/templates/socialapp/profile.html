@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block socialapp %}
+    <div class="row shadow-sm">
+        <div class="col-md-4">
+            <div class="d-flex justify-content-left">
+                <image class="my-3 mx-3 border border-3 shadow-md"
+                        src="{{ request.user.userextradetail_set.get.profile_image.url }}" 
+                        style="height:200px;width:200px;border-radius:50%;"></image>
+                
+            </div>
+            <p class="mx-3 fs-4 fw-lighter">{{ request.user.first_name | capfirst }} {{ request.user.last_name| capfirst }}</p>     
+            <p class="mx-3">Keep it Simple</p>
+
+        </div>
+        <div class="col-md-8">
+            <button type="button" class="btn border btn-primary shadow-sm btn-large mx-3 my-5">
+                <b>55 Followers </b>
+                <image class="mx-2" src='{% static "utils/follow1.png"%}' height="35" width="35"></image>
+            </button>
+            <button type="button" class="btn border btn-danger shadow-sm  btn-large mx-3 my-5">
+                <b>110 Following</b>
+                <image class="mx-2" src='{% static "utils/follow.png"%}' height="35" width="35"></image>
+            </button>
+
+            <image class="mx-2 shadow-sm" src='{% static "utils/settings.png"%}' height="35" width="35"></image>
+        </div>
+    </div>
+
+    <div class="row mt-5 shadow-sm" id="user-posts" >
+        <div class="row rounded">
+            <div class="col-sm-6 fs-6 text-primary bg-light border d-flex justify-content-center py-2 ">
+                <image class="mx-2" src='{% static "utils/instagram-post.png"%}' height="30" width="30"></image>
+            </div>
+            <div class="col-sm-6 fs-6 text-danger bg-light border d-flex justify-content-center py-2 ">
+                <image class="mx-2" src='{% static "utils/reels.png"%}' height="30" width="30"></image>
+            </div>
+        <div>
+        <div class="row mt-2" style="height:1000px;overflow:auto">        
+            {% for object in objects %}      
+                    {% include "socialapp/social-post.html" with object=object column=3 img_height=200 card_rem=20 post_show="profile" %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock socialapp %}

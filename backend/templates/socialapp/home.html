@@ -3,13 +3,28 @@
 {% block socialapp %}
     <div class="row">
         <div class="col-sm-2">
-            {% include "socialapp/social-sidebar-menu.html" %}
+            {% include "socialapp/social-sidebar-menu.html" with category=category %}
         </div>
         <div class="col-sm-8">
-            <div class="row">
-            {% for object in objects %}          
-                {% include "socialapp/social-post.html" with object=object %}
+            <div class="row" id="infinite-scroll">
+            {% for object in objects %}      
+                {% include "socialapp/social-post.html" with object=object column=6 img_height=350 card_rem=35 post_show="home"%}
             {% endfor %}
+            </div>
+            <div class="d-flex justify-content-between mt-2 mb-2">
+                {% if objects.has_previous %}
+                <button class="btn btn-sm btn-primary">
+                    <a href='{% url "socialapp:home-post-filter" category=category page=objects.previous_page_number %}'
+                       style="text-decoration:none;color:white"><b>Previous</b></a>
+                </button>
+                {% endif %}
+
+                {% if objects.has_next %}
+                <button class="btn btn-sm btn-danger">
+                    <a href='{% url "socialapp:home-post-filter" category=category page=objects.next_page_number %}'
+                        style="text-decoration:none;color:white"><b>Next</b></a>
+                </button>
+                {% endif %}
             </div>
         </div>
         <div class="col-sm-2">
@@ -17,9 +32,9 @@
             {% for user in users %}
                 {% include "socialapp/friend-suggestions.html" with user=user %}
             {% endfor %}
-            </div>
-            
+            </div> 
+            {% include "socialapp/add-post-form.html" %}      
         </div>
         
-    </div>   
+    </div>
 {% endblock socialapp %}

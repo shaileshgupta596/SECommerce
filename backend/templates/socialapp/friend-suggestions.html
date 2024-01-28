@@ -1,12 +1,13 @@
-<div class="col-md-6 shadow-sm border  mb-3 rounded">
-    <div class="d-flex mb-2 rounded px-1 py-2">
-        <div class="post-user-image mx-auto">
+<div class="col-md-5 shadow-sm border mb-3 mx-2 rounded">
+    <div class="d-flex rounded">
+        <div class="post-user-image mx-auto pt-2">
             <image class="border border-2 border-secondary"
                 src="{{ user.userextradetail_set.get.profile_image.url }}" 
-                style='height:75px;width:75px;border-radius:50%'>
+                style='height:70px;width:70px;border-radius:50%'>
+                <p class="d-flex justify-content-center"><b>{{ user.username | capfirst }} </b></p>
+                <buttom class="btn btn-sm btn-primary mx-1 mb-2"><b>Follow</b></button>
             </image>
-            <p class="d-flex justify-content-center"><b> {{ user.username | capfirst }} </b></p>
-            <buttom class="btn btn-sm btn-primary mx-auto"><b>Follow</b></button>
         </div>
+        
     </div>
 </div>

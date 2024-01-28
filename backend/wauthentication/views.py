@@ -62,7 +62,7 @@ def user_login_view(request, *args, **kwargs):
             user = form.get_user()
             login(request=request, user=user)
             messages.success(request, "Logged in Successfully")
-            return redirect('/wauthentication/')
+            return redirect('/socialapp/')
         else:
             error_messages =  form.error_messages
             for key, error in error_messages.items():

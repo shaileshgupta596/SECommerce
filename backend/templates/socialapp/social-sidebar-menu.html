@@ -1,28 +1,73 @@
 {% load static %}
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/home.png" %}' width="20" height="20"> <b class="mx-3">Home</b> </image>
+    <image src='{% static "utils/home.png" %}' width="20" height="20"> 
+        <a style="text-decoration:none;color:black"
+           href='{% url "socialapp:home-post-filter" category="all" page=1 %}'>
+           {% if category == "all" %}<b class="mx-3" style="color:red">All</b>{%else%}<b class="mx-3">All</b>{%endif%}
+        </a> 
+    </image>
 </div>
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/pizza.png" %}' width="20" height="20"> <b class="mx-3">Food</b> </image>
+    <image src='{% static "utils/pizza.png" %}' width="20" height="20"> 
+        <a style="text-decoration:none;color:black" 
+            href='{% url "socialapp:home-post-filter" category="food" page=1 %}'>
+            {% if category == "food" %}<b class="mx-3" style="color:red">Food</b>{%else%}<b class="mx-3" >Food</b>{%endif%}
+        </a> 
+    </image>
 </div>
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/plane.png" %}' width="20" height="20"> <b class="mx-3">Travel</b> </image>
+    <image src='{% static "utils/plane.png" %}' width="20" height="20"> 
+        <a style="text-decoration:none;color:black" 
+            href='{% url "socialapp:home-post-filter" category="travel" page=1 %}'>
+            {% if category == "travel" %}<b class="mx-3" style="color:red">Travel</b>{%else%}<b class="mx-3">Travel</b>{%endif%}
+        </a> 
+    </image>
 </div>
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/television.png" %}' width="20" height="20"> <b class="mx-3">Entertainment</b> </image>
+    <image src='{% static "utils/television.png" %}' width="20" height="20">
+        <a style="text-decoration:none;color:black" 
+            href='{% url "socialapp:home-post-filter" category="entertainment" page=1 %}'>
+            {% if category == "entertainment" %}<b class="mx-3" style="color:red">Entertainment</b>{%else%}<b class="mx-3">Entertainment</b>{%endif%}
+        </a>
+    </image>
 </div>
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/megaphone.png" %}' width="20" height="20"> <b class="mx-3">News</b> </image>
+    <image src='{% static "utils/megaphone.png" %}' width="20" height="20">
+        <a style="text-decoration:none;color:black" 
+        href='{% url "socialapp:home-post-filter" category="news" page=1 %}'>
+        {% if category == "news" %}<b class="mx-3" style="color:red">News</b>{%else%}<b class="mx-3">News</b>{%endif%}
+    </a>
+    </image>
 </div>
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/tennis.png" %}' width="20" height="20"> <b class="mx-3">Sports</b> </image>
+    <image src='{% static "utils/tennis.png" %}' width="20" height="20">
+        <a style="text-decoration:none;color:black" 
+        href='{% url "socialapp:home-post-filter" category="sports" page=1 %}'>
+        {% if category == "sports" %}<b class="mx-3" style="color:red">Sports</b>{%else%}<b class="mx-3" >Sports</b>{%endif%}
+    </a>
+    </image>
 </div>
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/stocks.png" %}' width="20" height="20"> <b class="mx-3">Business</b> </image>
+    <image src='{% static "utils/stocks.png" %}' width="20" height="20">
+        <a style="text-decoration:none;color:black" 
+        href='{% url "socialapp:home-post-filter" category="business" page=1 %}'>
+        {% if category == "business" %}<b class="mx-3" style="color:red">Business</b>{%else%}<b class="mx-3">Business</b>{%endif%}
+        </a>
+    </image>
 </div>
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/brain.png" %}' width="20" height="20"> <b class="mx-3">Learning</b> </image>
+    <image src='{% static "utils/brain.png" %}' width="20" height="20">
+        <a style="text-decoration:none;color:black" 
+        href='{% url "socialapp:home-post-filter" category="learning" page=1 %}'>
+        {% if category == "learning" %}<b class="mx-3" style="color:red">Learning</b>{%else%}<b class="mx-3">Learning</b>{%endif%}
+        </a>
+    </image>
 </div>
 <div class="card-header shadow-sm" style="background-color:white">
-    <image src='{% static "utils/musical-note.png" %}' width="20" height="20"> <b class="mx-3">Music</b> </image>
+    <image src='{% static "utils/musical-note.png" %}' width="20" height="20">
+        <a style="text-decoration:none;color:black" 
+        href='{% url "socialapp:home-post-filter" category="music" page=1 %}'>
+        {% if category == "music" %}<b class="mx-3" style="color:red">Music</b>{%else%}<b class="mx-3">Music</b>{%endif%}
+        </a>
+     </image>
 </div>

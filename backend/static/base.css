@@ -18,5 +18,9 @@ button{
 
 .container{
     position: relative;
-    margin-top: 100px;
+    margin-top: 90px;
+}
+
+a{
+    text-decoration: none;
 }

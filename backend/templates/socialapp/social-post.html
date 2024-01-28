@@ -1,6 +1,6 @@
 {% load static %}
-<div class="col-md-6 mb-3 mx-auto d-flex justify-content-center">
-    <div class="card border border-1 shadow-sm rounded" style="width: 35rem;">
+<div class="col-md-{{column}} mb-3 mx-auto d-flex justify-content-center">
+    <div class="card border border-1 shadow-sm rounded" style="width: {{card_rem}}rem;">
         <div class="card-header d-flex justify-content-between">
             <div class="post-user-image">
                 <image class="border border-2 border-secondary"
@@ -22,11 +22,13 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ object.id }}">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    {% if object.user == request.user and post_show == "profile" %}
+                    <a class="dropdown-item" href='{% url "socialapp:delete-post" post_id=object.id %}'>Delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        <img class="card-img-top" src="{{ object.image.url }}" alt="Card image cap"  height="350">
+        <img class="card-img-top" src="{{ object.image.url }}" alt="Card image cap"  height="{{img_height}}">
         <div class="card-footer">
             <image class="mx-2" src='{% static "utils/heart.png" %}' width="30" height="30"></image>
             <image class="mx-2" src='{% static "utils/chat.png" %}' width="30" height="30"></image>
@@ -37,6 +39,7 @@
         </div>
         <div class="card-body">
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="disabled" style="color:#c5d3c5">{{ object.uploaded_at }}</p>
         </div>
     </div>
 </div>
