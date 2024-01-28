@@ -16,4 +16,5 @@ def user_profile_image_handler(instance, filename):
 class UserExtraDetail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile_image = models.ImageField(upload_to=user_profile_image_handler)
+    user_bio = models.TextField(blank=True, null=True)
 

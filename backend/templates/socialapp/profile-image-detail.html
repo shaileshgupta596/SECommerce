@@ -1,0 +1,8 @@
+<div class="d-flex justify-content-left">
+    <image class="my-3 mx-3 border border-3 shadow-md"
+            src="{{ request.user.userextradetail_set.get.profile_image.url }}" 
+            style="height:200px;width:200px;border-radius:50%;"></image>
+    
+</div>
+<p class="mx-3 fs-4 fw-lighter">{{ request.user.first_name | capfirst }} {{ request.user.last_name| capfirst }}</p>     
+<p class="mx-3">{{ request.user.userextradetail_set.get.user_bio }}</p>

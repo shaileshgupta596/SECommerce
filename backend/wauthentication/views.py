@@ -108,13 +108,20 @@ def user_details_change_view(request, *args, **kwargs):
             user.last_name = cleaned_data.get('last_name')
             user.email = cleaned_data.get('email')
             user.save()
+
+            extra_details = UserExtraDetail.objects.get(user=user)
+            extra_details.user_bio = cleaned_data.get("user_bio")
+            extra_details.save()
+
             messages.success(request, "User Details Changed Successfully")
         else:
             error_messages =  form.error_messages
             for key, error in error_messages.items():
                 messages.warning(request, error)
     else:
-        form = UserDeatailChangeForm(data=None, instance=user)
+        extra_details = UserExtraDetail.objects.get(user=user)
+        user_bio = extra_details.user_bio
+        form = UserDeatailChangeForm(data=None, instance=user, initial={"user_bio":user_bio})
     context = {"form":form}
     return render(request=request, template_name=template_name, context=context)
 

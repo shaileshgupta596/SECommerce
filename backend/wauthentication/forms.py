@@ -21,14 +21,14 @@ class UEDForm(forms.ModelForm):
 class UserDeatailChangeForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "email", "is_active", "is_staff"]
+        fields = ["first_name", "last_name", "email", "is_active"]
         widgets = {
             "first_name": forms.TextInput({"class":"form-control"}),
             "last_name": forms.TextInput({"class":"form-control"}),
             "email": forms.TextInput({"class":"form-control"}),
-            "is_active": forms.TextInput({"class":"form-control", "readonly":True}),
-            "is_staff": forms.TextInput({"class":"form-control", "readonly":True})
+            "is_active": forms.TextInput({"class":"form-control", "readonly":True})
         }
+    user_bio = forms.CharField(max_length=255,widget=forms.Textarea({"class":"form-control", "rows":"5"}))
 
 
 class PasswordChangeForm(BasePasswordChangeForm):

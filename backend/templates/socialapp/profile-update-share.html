@@ -1,0 +1,12 @@
+{% load static %}
+<div class="col-md-12">
+    <a href='{% url "wauthentication:user-detail-change" %}'><button type="button" style="width:200px" class="btn border btn-light shadow-sm btn-large mx-4 my-2">
+        <b>Edit Details</b>
+        <image class="mx-2" src='{% static "utils/settings.png"%}' height="35" width="35"></image>
+    </button>
+    </a>
+    <button type="button" style="width:200px" class="btn border btn-light shadow-sm btn-large mx-4 my-2">
+        <b>Share Profile</b>
+        <image class="mx-2" src='{% static "utils/follow1.png"%}' height="35" width="35"></image>
+    </button>
+</div>

@@ -7,15 +7,7 @@ from .models import Post, User
 from .forms import AddPostForm
 # Create your views here.
 
-def home_page_view(request, *args, **kwargs):
-    template_name = "socialapp/home.html"
-    context = {}
-    objects = Post.objects.all()
-    users = User.objects.all()[:5]
-    context = {"objects": objects, "users":users}
-    return render(request=request, template_name=template_name, context=context)
-
-def home_page_post_filter_view(request, page=None, category=None, *args, **kwargs):
+def home_page_view(request, page=None, category=None, *args, **kwargs):
     template_name = "socialapp/home.html"
     context = {}
     if category is None or category == "" or category =="all": 
@@ -30,6 +22,7 @@ def home_page_post_filter_view(request, page=None, category=None, *args, **kwarg
     users = User.objects.all()[:5]
     context = {"objects": object_list, "users":users, "category":category}
     return render(request=request, template_name=template_name, context=context)
+
 
 # {% url "socialapp:add-post" %}
 
