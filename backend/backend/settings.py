@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'wauthentication',
     'socialapp',
     'userprofile',
+    'followers',
 ]
 
 MIDDLEWARE = [

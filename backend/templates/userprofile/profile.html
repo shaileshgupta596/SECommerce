@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% block socialapp %}
     <div class="row shadow-sm bg-light">
-        <div class="col-md-3">
+        <div class="col-md-3" >
             {% include "userprofile/profile-image-detail.html" %}
         </div>
 
         <div class="col-md-9">
             <div class="row">
-                {% include "userprofile/profile-follower-post.html" %}
+                <div id="profile-follower-post"
+                    hx-get='{% url "followers:followers-count" %}'
+                    hx-trigger='load'
+                    hx-swap='outerHTML'>
+                </div>
+                {% comment %} {% include "userprofile/profile-follower-post.html" %} {% endcomment %}
             </div>
 
             <div class="row mt-3 d-flex justify-content-left">

@@ -31,5 +31,5 @@ class Post(models.Model):
     description = models.CharField(max_length=250)
     is_public = models.BooleanField(default=True)
     category = models.CharField(max_length=120, choices=PostType, default=PostType.ALL)
-    uploaded_at = models.DateTimeField(blank=True, null=True, default=timezone.now())
+    uploaded_at = models.DateTimeField(blank=True, null=True, default=timezone.now)
 

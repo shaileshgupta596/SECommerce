@@ -2,7 +2,9 @@
 <div class="col-md-12 d-flex justify-content-left">
 
     <div class="profile-button my-3">
-        <h2 align="center">21</h2>
+        <h2 align="center">
+            {{ post_count }}
+        </h2>
         <button type="button" style="width:200px" class="btn btn-light  shadow-sm btn-large mx-3 my-2" disabled>
             <b>Posts</b>
             <image class="mx-2" src='{% static "utils/instagram-post.png"%}' height="35" width="35"></image>
@@ -10,7 +12,9 @@
     </div>
 
     <div class="profile-button my-3">
-        <h2 align="center">55</h2>
+        <h2 align="center">
+            {{ followers_count }}
+        </h2>
         <button type="button" style="width:200px" class="btn border btn-light shadow-sm btn-large mx-3 my-2">
             <b>Followers </b>
             <image class="mx-2" src='{% static "utils/queue.png"%}' height="35" width="35"></image>
@@ -18,7 +22,9 @@
     </div>
 
     <div class="profile-button my-3">
-        <h2 align="center">110</h2>
+        <h2 align="center">
+            {{ following_count }}
+        </h2>
         <button type="button" style="width:200px" class="btn border btn-light shadow-sm  btn-large mx-3 my-2">
             <b>Following</b>
             <image class="mx-2" src='{% static "utils/queue.png"%}' height="35" width="35"></image>

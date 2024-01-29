@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block socialapp %}
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 shadow-sm border mb-3 mx-2 rounded">
+            <div class="card-header d-flex justify-content-between">
+                <div class="post-user-image">
+                    <image class="border border-2 border-secondary"
+                           src="{%if request.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
+                           style='height:35px;width:35px;border-radius:50%'>
+                        <b class="mx-2"> {{ request.user.username | capfirst }} </b>
+                    </image>
+                </div> 
+                <button class="btn btn-primary btn-sm">Accept</button>
+            </div>  
+        </div>
+        <div class="col-md-6 shadow-sm border mb-3 mx-2 rounded">
+            <div class="card-header d-flex justify-content-between">
+                <div class="post-user-image">
+                    <image class="border border-2 border-secondary"
+                           src="{%if request.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
+                           style='height:35px;width:35px;border-radius:50%'>
+                        <b class="mx-2"> {{ request.user.username | capfirst }} </b>
+                    </image>
+                </div> 
+                <button class="btn btn-primary btn-sm">Accept</button>
+            </div>  
+        </div>
+        <div class="col-md-6 shadow-sm border mb-3 mx-2 rounded">
+            <div class="card-header d-flex justify-content-between">
+                <div class="post-user-image">
+                    <image class="border border-2 border-secondary"
+                           src="{%if request.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
+                           style='height:35px;width:35px;border-radius:50%'>
+                        <b class="mx-2"> {{ request.user.username | capfirst }} </b>
+                    </image>
+                </div> 
+                <button class="btn btn-primary btn-sm">Accept</button>
+            </div>  
+        </div>
+    </div>
+{% endblock socialapp %}
