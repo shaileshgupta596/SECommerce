@@ -25,14 +25,14 @@
         </div>
 
         {% if request.user.is_authenticated %}
-        <a class="" href="#">
+        <a class="" href="{% url "followers:follower-request-list" %}">
           <image src='{% static "utils/follow.png"%}' style='height:35px;width:35px;'>
             <span class="position-relative top-0 start-15 translate-middle badge rounded-pill bg-danger">
               2+
             </span>
           </image>
         </a>
-        <a class="" href='{% url "followers:follower-request-list" %}'>
+        <a class="" href='#'>
           <image src='{% static "utils/messenger.png"%}' style='height:30px;width:30px;'>
             <span class="position-relative top-0 start-15 translate-middle badge rounded-pill bg-danger">
               9+
