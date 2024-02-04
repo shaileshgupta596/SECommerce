@@ -11,25 +11,21 @@
             <a class="nav-link active" aria-current="page" href='{% url "socialapp:home-post-filter" category="all" page=1 %}'>Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href='{% url "socialsearch:search" %}'>Find Friends</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
           </li>
         </ul>
 
-        <div class="row" style="position:relative;left:-320;width:500px">
-          <div class="col-sm-6 input-group rounded">
-            <input type="search" 
-                   class="form-control rounded"
-                  />
-            <image class="mx-2 my-auto" src='{% static "utils/search.png"%}' width="25" height="25"></image>
-          </div>
-        </div>
-
         {% if request.user.is_authenticated %}
-        <a class="" href="{% url "followers:follower-request-list" %}">
+        <a class="mx-2" href="{% url "followers:follower-request-list" %}">
           <image src='{% static "utils/follow.png"%}' style='height:35px;width:35px;'>
-            <span class="position-relative top-0 start-15 translate-middle badge rounded-pill bg-danger">
-              2+
+            {% if request.user.followers.get_request_pending_count %}
+            <span class="position-relative top-0 start-15 translate-middle badge rounded-pill bg-danger">            
+                  {{ request.user.followers.get_request_pending_count }}     
             </span>
+            {% endif %}
           </image>
         </a>
         <a class="" href='#'>

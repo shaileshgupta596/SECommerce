@@ -24,7 +24,8 @@ urlpatterns = [
     path('wauthentication/', include('wauthentication.urls')),
     path('socialapp/', include('socialapp.urls')),
     path('socialapp/profile/', include('userprofile.urls')),
-    path('followers', include('followers.urls')),
+    path('followers/', include('followers.urls')),
+    path('search/', include('socialsearch.urls')),
 ]
 
 if settings.DEBUG:

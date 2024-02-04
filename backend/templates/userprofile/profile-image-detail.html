@@ -1,13 +1,13 @@
 <div class="d-flex justify-content-left">
     <image class="my-3 mx-3 border border-3 shadow-md"
-            src="{%if request.user.userextradetail_set.get.profile_image %}{{ request.user.userextradetail_set.get.profile_image.url }}{% endif %}" 
-            style="height:200px;width:200px;border-radius:50%;"></image>
+            src="{%if user.userextradetail_set.get.profile_image %}{{ user.userextradetail_set.get.profile_image.url }}{% endif %}" 
+            style="height:150px;width:150px;border-radius:50%;"></image>
     
 </div>
-<p class="mx-3 fs-4 fw-lighter">{{ request.user.first_name | capfirst }} {{ request.user.last_name| capfirst }}</p>     
+<p class="mx-3 fs-4 fw-lighter">{{ user.first_name | capfirst }} {{ user.last_name| capfirst }}</p>     
 <p class="mx-3">
-    {% if request.user.userextradetail_set.get.user_bio %}
-        {{ request.user.userextradetail_set.get.user_bio }}
+    {% if user.userextradetail_set.get.user_bio %}
+        {{ user.userextradetail_set.get.user_bio }}
     {% else %}
         Add Bio....
     {% endif %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'socialapp',
     'userprofile',
     'followers',
+    'socialsearch',
 ]
 
 MIDDLEWARE = [

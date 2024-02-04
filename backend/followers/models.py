@@ -12,16 +12,16 @@ status_choices = [
 ]
 
 class FollowerQuerySet(models.QuerySet):
-    def get_count(self):
-        return self.count()
+    def get_request_pending_count(self):
+        return self.filter(status="P").count()
 
 
 class FollowerManager(models.Manager):
     def get_queryset(self) -> QuerySet:
         return FollowerQuerySet(self.model, using=self._db)
     
-    def get_count(self):
-        return self.get_queryset().get_count()
+    def get_request_pending_count(self):
+        return self.get_queryset().get_request_pending_count()
 
 
 class Follower(models.Model):

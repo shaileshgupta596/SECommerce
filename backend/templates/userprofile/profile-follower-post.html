@@ -15,20 +15,24 @@
         <h2 align="center">
             {{ followers_count }}
         </h2>
-        <button type="button" style="width:200px" class="btn border btn-light shadow-sm btn-large mx-3 my-2">
+        <a href='{% url "followers:user-followers" %}'>
+            <button type="button" style="width:200px" class="btn border btn-danger shadow-sm btn-large mx-3 my-2">
             <b>Followers </b>
             <image class="mx-2" src='{% static "utils/queue.png"%}' height="35" width="35"></image>
-        </button>
+            </button>
+        </a>
     </div>
 
     <div class="profile-button my-3">
         <h2 align="center">
             {{ following_count }}
         </h2>
-        <button type="button" style="width:200px" class="btn border btn-light shadow-sm  btn-large mx-3 my-2">
-            <b>Following</b>
-            <image class="mx-2" src='{% static "utils/queue.png"%}' height="35" width="35"></image>
-        </button>
+        <a href='{% url "followers:user-following" %}'>
+            <button type="button" style="width:200px" class="btn border btn-primary shadow-sm  btn-large mx-3 my-2">
+                <b>Following</b>
+                <image class="mx-2" src='{% static "utils/queue.png"%}' height="35" width="35"></image>
+            </button>
+        </a>
     </div>
     <!--
     <div class="my-5">

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block socialapp %}
+    <div class="row d-flex justify-content-center shadow-sm my-2">
+        <div class="row d-flex justify-content-center my-2" id="search-box">
+            <div class="col-md-8 ">
+                <input type="search" 
+                       hx-trigger="keyup changed delay:500ms"
+                       hx-get='{% url "socialsearch:search-result" %}'
+                       hx-target="#search-result"
+                       name="search"
+                       placeholder="Enter Your Text" 
+                       class="form-control"/>
+            </div>
+        </div>
+
+        <div class="row my-2"
+            id="search-result">
+            {% include "socialsearch/search-result.html" with objects=objects %}  
+        </div>
+    </div>
+
+{% endblock socialapp %}
