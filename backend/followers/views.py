@@ -17,6 +17,16 @@ def get_followers_following_count_view(request, user_id=None, *args, **kwargs):
             user = get_object_or_404(User, id=user_id)
         except:
             return HttpResponse("User not Found")
+
+    current_user = request.user  
+    if current_user.id == user.id:
+        show_post = True
+    else:
+        try:
+            show_post = current_user.following.get(following_id=user, status="A")
+            show_post = True
+        except:
+            show_post = False
    
     followers_count = user.followers.filter(status="A").count()
     following_count = user.following.filter(status="A").count()
@@ -24,7 +34,8 @@ def get_followers_following_count_view(request, user_id=None, *args, **kwargs):
     context = {
         "followers_count": followers_count,
         "following_count":following_count,
-        "post_count": post_count
+        "post_count": post_count,
+        "show_post":show_post
     }
     return render(request=request, template_name=template_name, context=context)
 
@@ -49,22 +60,30 @@ def follower_request_list_view(request, *args, **kwargs):
 
 
 @login_required(login_url="/wauthentication/login/")
-def user_follower_view(request, *args, **kwargs):
+def user_follower_view(request, user_id=None, *args, **kwargs):
     template_name = "followers/followers.html"
     context = {}
-    user = request.user
-    user = User.objects.get(id=user.id)
+    if user_id is None:
+        user = request.user
+        user = User.objects.get(id=user.id)
+    else:
+        user = User.objects.get(id=user_id)
+
     request_list = user.followers.all().filter(status="A")
     context = {"objects": request_list}
     return render(request=request, template_name=template_name, context=context)
 
 
 @login_required(login_url="/wauthentication/login/")
-def user_following_view(request, *args, **kwargs):
+def user_following_view(request, user_id=None, *args, **kwargs):
     template_name = "followers/following.html"
     context = {}
-    user = request.user
-    user = User.objects.get(id=user.id)
+    if user_id is None:
+        user = request.user
+        user = User.objects.get(id=user.id)
+    else:
+        user = User.objects.get(id=user_id)
+
     request_list = user.following.all().filter(status="A")
     context = {"objects": request_list}
     return render(request=request, template_name=template_name, context=context)

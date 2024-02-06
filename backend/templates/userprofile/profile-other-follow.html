@@ -1,0 +1,26 @@
+{% load static %}
+<div class="col-md-12">
+    {% if follow %}
+    <form action='{% url "followers:remove-following" %}' method="POST">
+        {%csrf_token%}
+        <input type="text" name="following_id" value="{{user.id}}" hidden>
+        <button type="submit" style="width:200px" class="btn border btn-danger shadow-sm btn-large mx-2">
+            {% if follow_object.status == "P" %}
+            <b class="mx-2">Request Sent</b>
+            {% else %}
+            <b class="mx-2">Unfollow</b>
+            {% endif %}
+            <image class="mx-2" src='{% static "utils/follow.png" %}' height="35" width="35"></image>
+        </button>
+    </form>
+    {% else %}
+    <form action='{% url "followers:user-follow-request" %}' method="POST">
+        {%csrf_token%}
+        <input type="text" name="following_id" value="{{user.id}}" hidden>
+        <button type="submit" style="width:200px" class="btn border btn-primary shadow-sm btn-large mx-2">
+            <b class="mx-2">Follow</b>
+            <image class="mx-2" src='{% static "utils/follow.png" %}' height="35" width="35"></image>
+        </button>
+    </form>
+    {% endif %}
+</div>

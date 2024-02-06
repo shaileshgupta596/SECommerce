@@ -26,15 +26,18 @@
             <div class="row mt-3 d-flex justify-content-left">
                 {% if request.user.id == user.id %}
                     {% include "userprofile/profile-update-share.html" %}
+                {% else %}
+                    {% include "userprofile/profile-other-follow.html" with follow=show_post user=user follow_object=follow_object %}
                 {% endif %}
             </div>
         </div>
 
     </div>
-
+    {% if show_post %}
     <div class="row mt-5 shadow-sm bg-light" id="user-posts" >
         {% include "userprofile/profile-post-reel-switch.html" %}
     </div>
+    {% endif %}
 
     {% include "socialapp/add-post-form.html" %}
 

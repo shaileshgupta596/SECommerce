@@ -34,7 +34,7 @@
                 <form action='{% url "followers:remove-following" %}' method="POST">
                     {% csrf_token %}
                     <input type="text" name="following_id" value="{{ object.id }}" hidden/>
-                    <button type="submit" style="width:100px" class="btn btn-secondary btn-sm mx-2"><b>Pull Request</b></button>
+                    <button type="submit" style="width:100px" class="btn btn-secondary btn-sm mx-2"><b>Request Sent</b></button>
                 </form>
             </div> 
             {% endif %}
