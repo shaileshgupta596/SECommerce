@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
 from django.core.paginator import Paginator
-from .models import Post, User
+from .models import Post, User, Liked, Comment
 from .forms import AddPostForm
 # Create your views here.
 
@@ -51,6 +51,7 @@ def add_post_view(request, *args, **kwargs):
 def edit_post_view(request, *args, **kwargs):
     pass
 
+
 @login_required(login_url="/wauthentication/login/")
 def delete_post_view(request, post_id, *args, **kwargs):
     # print(post_id)
@@ -63,6 +64,75 @@ def delete_post_view(request, post_id, *args, **kwargs):
         messages.error(request, "Post Not Found")
     success_url = reverse("userprofile:user-profile")
     return redirect(success_url)
+
+@login_required(login_url="/wauthentication/login/")
+def post_details_view(request, post_id=None, *args, **kwargs):
+    template_name = "socialapp/post-details.html"
+    context = {}
+    current_user = request.user
+    object = Post.objects.get(id=post_id)
+    liked_user_object = Liked.objects.filter(post=object)
+    try:
+        liked = Liked.objects.get(user=current_user, post=post_id)
+    except:
+        liked = False
+    context = {"object": object, "liked":liked, "liked_count": liked_user_object.count()}
+    return render(request=request, template_name=template_name, context=context)
+
+
+@login_required(login_url="/wauthentication/login/")
+def post_liked_unliked_view(request, post_id=None, *args, **kwargs):
+    template_name = "socialapp/partials/liked.html"
+    context = {}
+    current_user = request.user
+    liked_flag = True
+    post = Post.objects.get(id=post_id)
+    try:
+        liked = Liked.objects.get(user=current_user, post=post)
+        liked.delete()
+        liked_flag = False
+    except :
+        liked = Liked(user=current_user, post=post)
+        liked.save()
+    
+    context = {'liked': liked_flag }
+    return render(request=request, template_name=template_name, context=context)
+
+
+@login_required(login_url="/wauthentication/login/")
+def post_liked_by_container_view(request, post_id=None, *args, **kwargs):
+    template_name = "socialapp/partials/post-liked-container.html"
+    context = {}
+    current_user = request.user
+    post = Post.objects.get(id=post_id)
+    user_objects = Liked.objects.filter(post=post)
+    context = {"user_objects": user_objects}
+    return render(request=request, template_name=template_name, context=context)
+
+@login_required(login_url="/wauthentication/login/")
+def post_comment_by_container_view(request, post_id=None, *args, **kwargs):
+    template_name = "socialapp/partials/post-comment-container.html"
+    context = {}
+    current_user = request.user
+    post = Post.objects.get(id=post_id)
+    user_objects = Comment.objects.filter(post=post)
+    
+    context = {"user_objects": user_objects, "post_id": post_id}
+    return render(request=request, template_name=template_name, context=context)
+
+
+@login_required(login_url="/wauthentication/login/")
+def post_comment_add_view(request, post_id=None, *args, **kwargs):
+    if request.method == "POST":
+        comment = request.POST.get('comment')
+        post = Post.objects.get(id=post_id)
+        current_user = request.user 
+        comment_obj = Comment(post=post, user=current_user, comment=comment)
+        comment_obj.save()
+        return redirect(reverse("socialapp:post-details", kwargs={"post_id":post_id}))
+    return redirect(reverse("socialapp:post-details", kwargs={"post_id":post_id}))
+
+
 
 
 

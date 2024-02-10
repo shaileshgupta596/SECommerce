@@ -6,7 +6,9 @@
                 <image class="border border-2 border-secondary"
                        src="{%if object.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
                        style='height:35px;width:35px;border-radius:50%'>
-                    <b class="mx-2"> {{ object.user.username | capfirst }} </b>
+                    <a href='{% url "userprofile:others-user-profile" user_id=object.user.id %}'>
+                        <b class="mx-2"> {{ object.user.username | capfirst }} </b>
+                    </a>
                 </image>
             </div> 
             <div class="dropdown post-additional-menu">
@@ -28,9 +30,15 @@
                 </div>
             </div>
         </div>
+        <a href='{% url "socialapp:post-details" post_id=object.id %}'>
         <img class="card-img-top" src="{{ object.image.url }}" alt="Card image cap"  height="{{img_height}}">
+        </a>
         <div class="card-footer">
-            <image class="mx-2" src='{% static "utils/heart.png" %}' width="30" height="30"></image>
+            {% if request.user == object.user %}
+                <image class="mx-2" src='{% static "utils/heart_red.png" %}' width="30" height="30"></image>
+            {% else %}
+                <image class="mx-2" src='{% static "utils/heart.png" %}' width="30" height="30"></image>
+            {% endif %}
             <image class="mx-2" src='{% static "utils/chat.png" %}' width="30" height="30"></image>
             <image class="mx-2" src='{% static "utils/send.png" %}' width="30" height="30"></image>
             <div class="mx-2 mt-2">

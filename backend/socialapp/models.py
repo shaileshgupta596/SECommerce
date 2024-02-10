@@ -24,6 +24,7 @@ class PostType(models.TextChoices):
     BUSINESS = "business", "Business"
     LEARNING = "learning", "Learning"
     MUSIC = "music", "Music"
+    
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -32,4 +33,23 @@ class Post(models.Model):
     is_public = models.BooleanField(default=True)
     category = models.CharField(max_length=120, choices=PostType, default=PostType.ALL)
     uploaded_at = models.DateTimeField(blank=True, null=True, default=timezone.now)
+
+
+class Liked(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    liked_at = models.DateTimeField(blank=True, null=True, default=timezone.now)
+
+    def __str__(self):
+        return f"{self.post} liked by => {self.user}"
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=250, null=True, blank=True)
+    commented_at = models.DateTimeField(blank=True, null=True, default=timezone.now)
+
+    def __str__(self):
+        return f"{self.comment} comments by => {self.user} on post {self.post}"
 

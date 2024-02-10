@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block socialapp %}
+{% load static %}
+
+    <div class="row">
+        <div class="col-md-8 d-flex justify-content-center">
+            <div class="card border border-1 shadow rounded" style="width: 60rem;">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="post-user-image">
+                        <image class="border border-2 border-secondary "
+                               src="{% if object.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
+                               style='height:40px;width:40px;border-radius:50%'>
+                            <b class="mx-2 text-primary"> {{ object.user.username | capfirst }} </b>
+                        </image>
+                    </div> 
+                    <div class="dropdown post-additional-menu">
+                        <image class="dropdown-toggle mt-2"
+                                id="dropdownMenuButton{{ object.id }}" 
+                                data-bs-toggle="dropdown" 
+                                aria-haspopup="true" 
+                                aria-expanded="false"
+                                src='{% static "utils/more_8220635.png" %}' 
+                                width="15" 
+                                height="15">
+                        </image>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ object.id }}">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            {% if object.user == request.user %}
+                            <a class="dropdown-item" href='{% url "socialapp:delete-post" post_id=object.id %}'>Delete</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <img class="card-img-top" src="{{ object.image.url }}" alt="Card image cap" height="600">
+            </div>
+        </div>
+        <div class="col-md-4 border">
+            <div class="card-header">
+                <div class="post-user-image">
+                    <image class="border border-2 border-secondary"
+                           src="{%if object.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
+                           style='height:60px;width:60px;border-radius:50%'>
+                        <b class="mx-2 text-danger"> {{ object.user.username | capfirst }} </b>
+                    </image>
+                </div>
+                <p class="card-text my-2">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="disabled" style="color:#c5d3c5">{{ object.uploaded_at }}</p>
+            </div>
+            <div class="card-body d-flex justify-content-left">
+                <div  id="liked-container" 
+                        hx-trigger="click" 
+                        hx-get='{% url "socialapp:post-liked-unliked" post_id=object.id %}' 
+                        hx-target="#liked-container">
+                    <image class="mx-2" 
+                        src='{% if liked %}{% static "utils/heart_red.png" %}{% else %}{% static "utils/heart.png" %}{% endif %}' 
+                        width="30" 
+                        height="30">
+                    </image>
+                </div>
+                <div id="comment-container" 
+                    hx-trigger="click" 
+                    hx-get='{% url "socialapp:post-comment-container" post_id=object.id %}' 
+                    hx-target="#liked-comment-container">
+                    <image class="mx-2" src='{% static "utils/chat.png" %}' width="30" height="30"></image>
+                </div>
+                <div id="sent-container">
+                    <image class="mx-2" src='{% static "utils/send.png" %}' width="30" height="30"></image>
+                </div>
+            </div>
+            <div class="mx-4" 
+                hx-trigger="click" 
+                hx-get='{% url "socialapp:post-liked-container" post_id=object.id %}'
+                hx-target="#liked-comment-container">
+                <a>Liked By {{ liked_count }} Others.</a>
+            </div>
+            <hr>
+            <div id="liked-comment-container">
+                <div id="default-liked-loader" 
+                    hx-trigger="load" 
+                    hx-get='{% url "socialapp:post-comment-container" post_id=object.id %}'
+                    hx-swap="innerHTML">  
+                </div>  
+            </div>
+        </div>
+    </div>
+
+{% endblock socialapp %}

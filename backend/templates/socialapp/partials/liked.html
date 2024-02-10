@@ -1,0 +1,6 @@
+{% load static %}
+{% if liked %}
+    <image class="mx-2" src='{% static "utils/heart_red.png" %}' width="30" height="30"></image>
+{% else %}
+    <image class="mx-2" src='{% static "utils/heart.png" %}' width="30" height="30"></image>
+{% endif %}

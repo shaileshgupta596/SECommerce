@@ -1,0 +1,25 @@
+<div class="px-4 py-4 border" style="height:270px;overflow:auto">
+    <h6 align="center"> Comments </h6>
+    {% for object in user_objects %}
+    <div class="card-header border mt-2 rounded d-flex justify-content-between">
+        <div class="request-user-image mx-2 my-1">
+            <image class="border border-2 border-secondary"
+                    src="{%if object.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
+                    style='height:30px;width:30px;border-radius:50%'>
+                <a href='{% url "userprofile:others-user-profile" user_id=object.user.id %}'>
+                    <b class="mx-2"> {{ object.user.username | capfirst }} </b>
+                </a>
+                <p class=" mx-5 my-1">{{ object.comment }}</p>
+            </image>
+        </div>
+        <div class="text-secondary my-2">{{ object.commented_at }}</div>
+    </div>
+    {% endfor %}
+</div>
+<div class="">
+    <form class=" my-2" method="POST" action='{% url "socialapp:post-add-comment" post_id=post_id%}'>
+        {% csrf_token %}
+        <input type="text" name="comment" placeholder="type your comments ...." class="form-control my-1"/>
+        <button type="submit" class="btn btn-danger btn-sm my-2">Post</button>
+    </form>
+</div>

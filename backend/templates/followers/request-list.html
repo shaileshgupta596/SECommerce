@@ -10,7 +10,9 @@
                     <image class="border border-2 border-secondary"
                            src="{%if object.follower_id.userextradetail_set.get.profile_image %}{{ object.follower_id.userextradetail_set.get.profile_image.url }}{% endif %}"
                            style='height:60px;width:60px;border-radius:50%'>
-                        <b class="mx-2"> {{ object.follower_id.username | capfirst }} </b>
+                           <a href='{% url "userprofile:others-user-profile" user_id=object.follower_id.id %}'>
+                                <b class="mx-2"> {{ object.follower_id.username | capfirst }} </b>
+                           </a>
                     </image>
                 </div>
                 <div class="request-user-button">
