@@ -33,21 +33,55 @@
         <a href='{% url "socialapp:post-details" post_id=object.id %}'>
         <img class="card-img-top" src="{{ object.image.url }}" alt="Card image cap"  height="{{img_height}}">
         </a>
-        <div class="card-footer">
-            {% if request.user == object.user %}
-                <image class="mx-2" src='{% static "utils/heart_red.png" %}' width="30" height="30"></image>
-            {% else %}
-                <image class="mx-2" src='{% static "utils/heart.png" %}' width="30" height="30"></image>
-            {% endif %}
-            <image class="mx-2" src='{% static "utils/chat.png" %}' width="30" height="30"></image>
+        <div class="card-footer d-flex justify-content-left">
+            <div id="liked-container-{{object.id}}" 
+                    hx-trigger="click" 
+                    hx-get='{% url "socialapp:post-liked-unliked" post_id=object.id %}' 
+                    hx-target="#liked-container-{{object.id}}">
+                <div class="default-like-load"
+                    hx-get='{% url "socialapp:post-check-liked-unliked" post_id=object.id %}' 
+                    hx-trigger="load"
+                    hx-swap="innerHTML">
+                </div>
+            </div>
+            <image class="mx-2" src='{% static "utils/chat.png" %}' width="30" height="30"
+                    hx-trigger="click"
+                    hx-get='{% url "socialapp:post-comment-container" post_id=object.id %}'
+                    hx-target="#show-like-comment-sent-modal"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#like-comment-sent-modal">
+            </image>
             <image class="mx-2" src='{% static "utils/send.png" %}' width="30" height="30"></image>
-            <div class="mx-2 mt-2">
-                    Liked By 18 Others.
+            <div class="mx-2 mt-2"
+                hx-trigger="click"
+                hx-get='{% url "socialapp:post-liked-container" post_id=object.id %}'
+                hx-target="#show-like-comment-sent-modal"
+                data-bs-toggle="modal" 
+                data-bs-target="#like-comment-sent-modal">
+                    <a class="default-liked-count-load" 
+                        hx-trigger="load" 
+                        hx-get='{% url "socialapp:post-like-count" post_id=object.id %}'
+                        hx-target="#like-count-container-{{object.id}}">
+                        <div id="like-count-container-{{object.id}}"></div>
+                    </a>
             </div>
         </div>
         <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">{{ object.description }}</p>
         <p class="disabled" style="color:#c5d3c5">{{ object.uploaded_at }}</p>
         </div>
-    </div>
+    </div> 
 </div>
+
+<div class="modal fade" id="like-comment-sent-modal" tabindex="-1" aria-labelledby="like-comment-sent-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="show-like-comment-sent-modal"></div>
+            </div>
+        </div>
+    </div>
+</div> 

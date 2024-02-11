@@ -53,11 +53,11 @@
                         hx-trigger="click" 
                         hx-get='{% url "socialapp:post-liked-unliked" post_id=object.id %}' 
                         hx-target="#liked-container">
-                    <image class="mx-2" 
-                        src='{% if liked %}{% static "utils/heart_red.png" %}{% else %}{% static "utils/heart.png" %}{% endif %}' 
-                        width="30" 
-                        height="30">
-                    </image>
+                    <div class="default-like-load"
+                        hx-get='{% url "socialapp:post-check-liked-unliked" post_id=object.id %}' 
+                        hx-trigger="load"
+                        hx-swap="innerHTML">
+                    </div>
                 </div>
                 <div id="comment-container" 
                     hx-trigger="click" 

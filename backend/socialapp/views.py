@@ -19,7 +19,7 @@ def home_page_view(request, page=None, category=None, *args, **kwargs):
     page_number = 1 if page is None else page
     object_list = paginator_object.page(page_number)
 
-    users = User.objects.all()[:5]
+    users = User.objects.exclude(id=request.user.id)[0:5]
     context = {"objects": object_list, "users":users, "category":category}
     return render(request=request, template_name=template_name, context=context)
 
@@ -65,6 +65,7 @@ def delete_post_view(request, post_id, *args, **kwargs):
     success_url = reverse("userprofile:user-profile")
     return redirect(success_url)
 
+
 @login_required(login_url="/wauthentication/login/")
 def post_details_view(request, post_id=None, *args, **kwargs):
     template_name = "socialapp/post-details.html"
@@ -72,11 +73,35 @@ def post_details_view(request, post_id=None, *args, **kwargs):
     current_user = request.user
     object = Post.objects.get(id=post_id)
     liked_user_object = Liked.objects.filter(post=object)
+    context = {"object": object, "liked_count": liked_user_object.count()}
+    return render(request=request, template_name=template_name, context=context)
+
+
+@login_required(login_url="/wauthentication/login/")
+def post_liked_count_view(request,post_id=None, *args, **kwargs):
+    template_name = "socialapp/partials/post-like-count.html"
+    context = {}
+    current_user = request.user
+    post = Post.objects.get(id=post_id)
+    try:
+        liked_count = Liked.objects.filter(post=post).count()
+    except:
+        liked_count = 0
+    context = {"liked_count": liked_count}
+    return render(request=request, template_name=template_name, context=context)
+
+
+@login_required(login_url="/wauthentication/login/")
+def post_check_liked_unliked_view(request, post_id=None, *args, **kwargs):
+    template_name = "socialapp/partials/liked.html"
+    context = {}
+    current_user = request.user
+    post = Post.objects.get(id=post_id)
     try:
         liked = Liked.objects.get(user=current_user, post=post_id)
-    except:
-        liked = False
-    context = {"object": object, "liked":liked, "liked_count": liked_user_object.count()}
+    except :
+        liked = False    
+    context = {"liked": liked}
     return render(request=request, template_name=template_name, context=context)
 
 
@@ -109,6 +134,7 @@ def post_liked_by_container_view(request, post_id=None, *args, **kwargs):
     context = {"user_objects": user_objects}
     return render(request=request, template_name=template_name, context=context)
 
+
 @login_required(login_url="/wauthentication/login/")
 def post_comment_by_container_view(request, post_id=None, *args, **kwargs):
     template_name = "socialapp/partials/post-comment-container.html"
@@ -134,7 +160,13 @@ def post_comment_add_view(request, post_id=None, *args, **kwargs):
 
 
 
-
-
-
-
+def friend_suggestion_sidebar_view(request, *args, **kwargs):
+    template_name = "socialapp/friend-suggestions.html"
+    context = {}
+    current_user = request.user
+    users = User.objects.exclude(id=current_user.id)
+    follower_user_id = [follower.following_id.id for follower in current_user.following.all()]
+    users = users.exclude(id__in=follower_user_id)[0:4]
+    # print(users)
+    context = {"users": users}
+    return render(request=request, template_name=template_name, context=context)

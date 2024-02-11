@@ -28,10 +28,8 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <div class="row">
-            {% for user in users %}
-                {% include "socialapp/friend-suggestions.html" with user=user %}
-            {% endfor %}
+            <div class="row" hx-trigger="load" hx-get='{% url "socialapp:friend-suggestion" %}' hx-swap="innerHTML">
+           
             </div> 
             {% include "socialapp/add-post-form.html" %}      
         </div>

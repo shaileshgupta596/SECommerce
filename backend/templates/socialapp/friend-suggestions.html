@@ -1,3 +1,5 @@
+{% load static %}
+{% for user in users %}
 <div class="col-md-5 shadow-sm border mb-3 mx-2 rounded">
     <div class="d-flex rounded">
         <div class="post-user-image mx-auto pt-2">
@@ -5,8 +7,28 @@
                 src="{%if user.userextradetail_set.get.profile_image %}{{ user.userextradetail_set.get.profile_image.url }}{% endif %}" 
                 style='height:70px;width:70px;border-radius:50%'>
                 <p class="d-flex justify-content-center"><b>{{ user.username | capfirst }} </b></p>
-                <buttom class="btn btn-sm btn-primary mx-1 mb-2"><b>Follow</b></button>
             </image>
+            <div class="request-user-button my-2 ">
+                <form action='{% url "followers:user-follow-request" %}' method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="following_id" value="{{ user.id }}" hidden/>
+                    <button class="btn btn-sm btn-primary mx-1 mb-2"><b>Follow</b></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="col-md-5 shadow-sm border mb-3 mx-2 rounded">
+    <div class="d-flex rounded">
+        <div class="post-user-image mx-auto pt-2">
+            <a href='{% url "socialsearch:search" %}'><image class=""
+                src='{% static "utils/plus-sign.png"%}' 
+                style='height:70px;width:70px;border-radius:50%'>
+                <button class="btn btn-sm btn-primary mx-1 mb-2 my-3"><b>Find More</b></button>
+            </image>
+            </a>
         </div>
     </div>
 </div>
