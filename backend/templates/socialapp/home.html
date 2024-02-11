@@ -6,6 +6,7 @@
             {% include "socialapp/social-sidebar-menu.html" with category=category %}
         </div>
         <div class="col-sm-8">
+            {% include "socialapp/status.html" with users=users%}
             <div class="row" id="infinite-scroll">
             {% for object in objects %}      
                 {% include "socialapp/social-post.html" with object=object column=6 img_height=350 card_rem=35 post_show="home"%}

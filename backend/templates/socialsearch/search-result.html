@@ -4,9 +4,9 @@
         {% for object, status in objects %}
         <div class="card-header border mt-2 rounded d-flex justify-content-between">
             <div class="request-user-image mx-3 my-2">
-                <image class="border border-2 border-secondary"
+                <image class="border border-3 border-warning"
                        src="{%if object.userextradetail_set.get.profile_image %}{{ object.userextradetail_set.get.profile_image.url }}{% endif %}"
-                       style='height:35px;width:35px;border-radius:50%'>
+                       style='height:45px;width:45px;border-radius:50%'>
                     <a href='{% url "userprofile:others-user-profile" user_id=object.id %}'><b class="mx-2"> {{ object.username | capfirst }} </b></a>
                 </image>
             </div>

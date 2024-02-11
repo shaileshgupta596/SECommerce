@@ -1,7 +1,9 @@
-<div class="d-flex justify-content-left">
-    <image class="my-3 mx-3 border border-3 shadow-md"
+<div class="my-2 d-flex justify-content-left">
+    <div class="d-flex justify-content-center shadow-lg" style="height:160px;width:160px;border-radius:50%;background:linear-gradient(to right, red, orange)">
+    <image class="my-1"
             src="{%if user.userextradetail_set.get.profile_image %}{{ user.userextradetail_set.get.profile_image.url }}{% endif %}" 
             style="height:150px;width:150px;border-radius:50%;"></image>
+    </div>
     
 </div>
 <p class="mx-3 fs-4 fw-lighter">{{ user.first_name | capfirst }} {{ user.last_name| capfirst }}</p>     

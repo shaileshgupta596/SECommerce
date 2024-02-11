@@ -19,7 +19,7 @@ def home_page_view(request, page=None, category=None, *args, **kwargs):
     page_number = 1 if page is None else page
     object_list = paginator_object.page(page_number)
 
-    users = User.objects.exclude(id=request.user.id)[0:5]
+    users = User.objects.exclude(id=request.user.id)
     context = {"objects": object_list, "users":users, "category":category}
     return render(request=request, template_name=template_name, context=context)
 

@@ -3,7 +3,7 @@
 <div class="col-md-5 shadow-sm border mb-3 mx-2 rounded">
     <div class="d-flex rounded">
         <div class="post-user-image mx-auto pt-2">
-            <image class="border border-2 border-secondary"
+            <image class="border border-3 border-warning"
                 src="{%if user.userextradetail_set.get.profile_image %}{{ user.userextradetail_set.get.profile_image.url }}{% endif %}" 
                 style='height:70px;width:70px;border-radius:50%'>
                 <p class="d-flex justify-content-center"><b>{{ user.username | capfirst }} </b></p>

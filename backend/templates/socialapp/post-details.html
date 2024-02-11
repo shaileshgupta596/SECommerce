@@ -8,7 +8,7 @@
             <div class="card border border-1 shadow rounded" style="width: 60rem;">
                 <div class="card-header d-flex justify-content-between">
                     <div class="post-user-image">
-                        <image class="border border-2 border-secondary "
+                        <image class="border border-3 border-warning "
                                src="{% if object.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
                                style='height:40px;width:40px;border-radius:50%'>
                             <b class="mx-2 text-primary"> {{ object.user.username | capfirst }} </b>
@@ -39,7 +39,7 @@
         <div class="col-md-4 border">
             <div class="card-header">
                 <div class="post-user-image">
-                    <image class="border border-2 border-secondary"
+                    <image class="border border-3 border-warning"
                            src="{%if object.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
                            style='height:60px;width:60px;border-radius:50%'>
                         <b class="mx-2 text-danger"> {{ object.user.username | capfirst }} </b>

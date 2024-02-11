@@ -1,0 +1,16 @@
+<div class="row mb-2 mx-1" style="height:100px;">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10 mb-2 d-flex justify-content-left rounded" style="overflow:auto">
+        {% for user in users %}
+        <div class="post-user-image pt-2 mx-2 ">
+            <image class="border border-4 border-warning shadow-lg"
+                src="{%if user.userextradetail_set.get.profile_image %}{{ user.userextradetail_set.get.profile_image.url }}{% endif %}" 
+                style='height:75px;width:75px;border-radius:50%'>
+            </image>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-1">
+    </div>
+</div>

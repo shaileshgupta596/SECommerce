@@ -3,7 +3,7 @@
     <div class="card border border-1 shadow-sm rounded" style="width: {{card_rem}}rem;">
         <div class="card-header d-flex justify-content-between">
             <div class="post-user-image">
-                <image class="border border-2 border-secondary"
+                <image class="border border-3 border-warning"
                        src="{%if object.user.userextradetail_set.get.profile_image %}{{ object.user.userextradetail_set.get.profile_image.url }}{% endif %}"
                        style='height:35px;width:35px;border-radius:50%'>
                     <a href='{% url "userprofile:others-user-profile" user_id=object.user.id %}'>
